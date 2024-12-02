@@ -1,0 +1,20 @@
+[package]
+name = "advent2024"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+diff = "0.1.13"
+
+[[bin]]
+name = "day01"
+path = "src/day01/main.rs"
+
+[[bin]]
+name = "day02"
+path = "src/day02/main.rs"
+
+[[bin]]
+name = "default"
+path = "src/main.rs"
+
