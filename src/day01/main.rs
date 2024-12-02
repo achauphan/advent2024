@@ -31,7 +31,7 @@ fn problem_2(group_1: Vec<i32>, group_2: Vec<i32>) -> i32 {
 
 	for group_1_val in group_1.iter() {
 		let frequency = group_2.iter().filter(|&group_2_val| *group_2_val == *group_1_val).count();	
-		similarity_score+= group_1_val * (frequency as i32);
+		similarity_score += group_1_val * (frequency as i32);
 	}
 
 	return similarity_score;
