@@ -20,6 +20,8 @@ For each day, where `X` is the day number (1-25):
 
 A debugger config is set up for testing - update the launch.json file with the day to debug. Then breakpoint in vscode and run with F5 or in the debug tab.
 
+`git push group-advent-solutions main:dylan` to push to group repo as separate branch.
+
 ## How to use (test solutions)
 
 Initial setup: `npm install`
@@ -42,10 +44,28 @@ Adding a tokenizer function in utils should make future days easier, and worked 
 
 Approach was just to parse the input as two columns, sort said columns, and then iterate over the lists, summing the absolute value of the differences each time.
 
-Since I believe the .sort method uses either Quick or Merge sort, it should be O(n log n) time complexity, and since we only iterate over the lists once, that should be the upper bound of this problem.
+#### Part 2
+
+This was a simple modification to the existing Part 1 solution. Just instead of summing up the abs of the differences, we sum up all left elements times their freq in the right. Use a built in `.filter()` function to simplify this process.
+
+### Day 2
+
+#### Part 1
+
+Goal was to check rows of integers and see if they follow two cases across the whole row. Using the tokenizer util, iterate over the rows and check the cases. If a comparison in the row fails a case, then the whole row fails.
 
 #### Part 2
 
-This was a simple modification to the existing Part 1 solution. Just instead of summing up the abs of the differences, we sum up all left elements times their freq in the right. Use a built in .filter function to simplify this process.
+Goal was to do the same as part one, but allow for a single errored value. This was a pain. There are 12 cases in my input which were not working with my initial design (as I believe the 0th index value was never being removed from the list), so a brute force solution was necessary. I hope to revisit this since as long as we can check 0 and ensure that it's accurate, then the first error found is the linchpin (if removing the first error doesn't work, then no other value can be removed so that it works). I could write a proof for this using induction, but I don't want to.
 
-Time complexity is based on the complexity of .filter, which I imagine is also O(n log n). Since it's called for each element in the array, this would likely be something like O(n^2 log n) then.
+### Day 3
+
+#### Part 1
+
+Goal was to sum up a series of `mul(x,y)` commands in a messy string. This was actually incredibly easy since I know regex pretty well. Just `.matchAll()` with the correct regex equation across the string, and then for each match, parse integers and sum up their products.
+
+#### Part 2
+
+Goal was to extend part 1 by also adding an enable/disable command as `do()` and `don't()`. This was also pretty straightforward. Adjust the regex string to also look for `do()` and `don't()` commands. Then, for each match, use the matched text (match[0]) to see if the command is enable, disable, or multiply, and then follow those commands.
+
+I love regex <3
