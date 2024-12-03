@@ -3,11 +3,9 @@ use std::fs::read_to_string;
 // &str is a string type
 fn read_lines(filename: &str) -> Vec<String> {
 	let mut lines = Vec::new();
-
 	for line in read_to_string(filename).unwrap().lines() {
 		lines.push(line.to_string());
 	}
-
 	return lines;
 }
 
@@ -39,8 +37,7 @@ fn problem_2(group_1: Vec<i32>, group_2: Vec<i32>) -> i32 {
 
 
 fn main() {
-	println!("Hello World!");
-	let input_filename = String::from("input.txt");
+	let input_filename = String::from("src/day01/input.txt");
 
 	let input_lines = read_lines(&input_filename);
 	
@@ -55,11 +52,7 @@ fn main() {
 		//println!("PARTS: {}, {}", line_splice[0].to_string(), line_splice[1].to_string());
 	}
 
-
 	let result_1 = problem_1(&mut group_1, &mut group_2);
 	let result_2 = problem_2(group_1, group_2);
-	println!("Problem 1 result: {} \n
-				Problem 2 result: {}", result_1, result_2);
-
-
+	println!("Problem 1: {}\nProblem 2: {}", result_1, result_2);
 }

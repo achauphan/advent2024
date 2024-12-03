@@ -1,8 +1,5 @@
 use std::fs::read_to_string;
 
-// - Levels are either all increasing or all decreasing
-// - Any two adjacent levels differ by at least 1 and at most 3
-
 fn read_lines(filename: &str) -> Vec<String> {
     let mut lines = Vec::new();
     for line in read_to_string(filename).unwrap().lines() {
@@ -34,7 +31,6 @@ fn check_report_increasing_or_decreasing(report: &Vec<i32>) -> bool {
         } else {
             continue;
         }
-
         // inverse of FALSE OR case only
         if !(is_increasing || is_decreasing) { break; }
     }
@@ -86,8 +82,10 @@ fn problem_2(reports: &Vec<Vec<i32>>) -> i32 {
 
         if !check_report_increasing_or_decreasing(&report)
             || !check_report_margins(&report, min_margin, max_margin) {
-
-            for (level_idx, level_value) in report.iter().enumerate() {
+            
+            // Check for cases where removing one level from a report
+            // passes both checks to be considered safe.
+            for (level_idx, _) in report.iter().enumerate() {
                let mut report_copy = report.clone();
                report_copy.remove(level_idx);
                if !check_report_increasing_or_decreasing(&report_copy) {
@@ -104,17 +102,16 @@ fn problem_2(reports: &Vec<Vec<i32>>) -> i32 {
             num_safe += 1;
         }
     }
-
     return num_safe;
 }
 
 
 fn main() {
-    let input_filename = String::from("input.txt");
+    let input_filename = String::from("src/day02/input.txt");
     let input_lines = read_lines(&input_filename);
     let parsed_input: Vec<Vec<i32>> = string_to_i32_vector(&input_lines);
 
-    println!("Problem 1: {}, Problem 2: {}",
+    println!("Problem 1: {}\nProblem 2: {}",
         problem_1(&parsed_input), problem_2(&parsed_input));
 
 }
