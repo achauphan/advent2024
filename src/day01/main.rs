@@ -1,14 +1,4 @@
-use std::fs::read_to_string;
-
-// &str is a string type
-fn read_lines(filename: &str) -> Vec<String> {
-	let mut lines = Vec::new();
-	for line in read_to_string(filename).unwrap().lines() {
-		lines.push(line.to_string());
-	}
-	return lines;
-}
-
+#[path = "../utils.rs"] mod utils;
 
 fn problem_1(group_1: &mut Vec<i32>, group_2: &mut Vec<i32>) -> i32 {
 	group_1.sort();
@@ -39,7 +29,7 @@ fn problem_2(group_1: Vec<i32>, group_2: Vec<i32>) -> i32 {
 fn main() {
 	let input_filename = String::from("src/day01/input.txt");
 
-	let input_lines = read_lines(&input_filename);
+	let input_lines = utils::read_lines(&input_filename);
 	
 	// Convert '   ' separated lines into two vectors
 	let mut group_1 = Vec::new();

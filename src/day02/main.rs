@@ -1,24 +1,4 @@
-use std::fs::read_to_string;
-
-fn read_lines(filename: &str) -> Vec<String> {
-    let mut lines = Vec::new();
-    for line in read_to_string(filename).unwrap().lines() {
-        lines.push(line.to_string());
-    }
-    return lines;
-}
-
-fn string_to_i32_vector(string_vec: &Vec<String>) -> Vec<Vec<i32>>{
-    let mut i32_vec = Vec::new();
-    for element in string_vec.iter() {
-        let parsed: Vec<i32> = element.split_whitespace()
-                                        .filter_map(|x| x.parse().ok())
-                                        .collect();
-        i32_vec.push(parsed);
-    }
-    return i32_vec;
-}
-
+#[path = "../utils.rs"] mod utils;
 
 fn check_report_increasing_or_decreasing(report: &Vec<i32>) -> bool {
     let mut is_increasing: bool = true;
@@ -108,9 +88,8 @@ fn problem_2(reports: &Vec<Vec<i32>>) -> i32 {
 
 fn main() {
     let input_filename = String::from("src/day02/input.txt");
-    let input_lines = read_lines(&input_filename);
-    let parsed_input: Vec<Vec<i32>> = string_to_i32_vector(&input_lines);
-
+    let input_lines = utils::read_lines(&input_filename);
+    let parsed_input: Vec<Vec<i32>> = utils::string_to_i32_vector(&input_lines);
     println!("Problem 1: {}\nProblem 2: {}",
         problem_1(&parsed_input), problem_2(&parsed_input));
 
