@@ -1,5 +1,5 @@
 import { Day } from "../day";
-import { tokenizeAsInt2dArrayByColumn } from "../utils";
+import { tokenizeAs2dArrayByColumn } from "../utils";
 
 class Day1 extends Day {
 
@@ -8,7 +8,7 @@ class Day1 extends Day {
     }
 
     solveForPartOne(input: string): string {
-        const tokens = tokenizeAsInt2dArrayByColumn(input);
+        const tokens = tokenizeAs2dArrayByColumn(input, (x) => parseInt(x, 10));
         const left = tokens[0];
         const right = tokens[1];
         left.sort((a, b) => a - b);
@@ -22,7 +22,7 @@ class Day1 extends Day {
     }
 
     solveForPartTwo(input: string): string {
-        const tokens = tokenizeAsInt2dArrayByColumn(input);
+        const tokens = tokenizeAs2dArrayByColumn(input, (x) => parseInt(x, 10));
         const left = tokens[0];
         const right = tokens[1];
         left.sort((a, b) => a - b);

@@ -69,3 +69,13 @@ Goal was to sum up a series of `mul(x,y)` commands in a messy string. This was a
 Goal was to extend part 1 by also adding an enable/disable command as `do()` and `don't()`. This was also pretty straightforward. Adjust the regex string to also look for `do()` and `don't()` commands. Then, for each match, use the matched text (match[0]) to see if the command is enable, disable, or multiply, and then follow those commands.
 
 I love regex <3
+
+### Day 4
+
+#### Part 1
+
+Goal was to find how many occurrences of the word "XMAS" there are in a grid of letters. A recursive solution was my immediate instinct, which should prevent too much unnecessary backtracking. As always with recursive solutions, once you figure out the base cases, it's not too hard. In this case, we do one full pass over the array of characters, and make a call to the `search()` function whenever we find a cell that matches the first letter in the search term. Then, the `search()` function will call up `searchInDirection()` for any cells surrounding the first letter that match the next letter. `searchInDirection()` will then continue calling itself on the next cell until either the next letter does not match, or there are no remaining letters in the search term. Perhaps not the most efficient solution, but since we iterate across the search term, we know that each letter is matched as we proceed, meaning we do not need to backtrack and double check our work at any point.
+
+#### Part 2
+
+Goal is to find the number of X-"MAS" patterns there are in an array of characters. Sometimes AoC is fun, and lets you reuse your part 1 code, and sometimes it doesn't. This is a case of the latter. No matter how I thought about it, there was no way to reuse my existing code without it being massively overhauled in a less than optimal manner. Attempting to make the part 2 solution generic also was not working out in my head since it's hard to decide exactly how other inputs would be handled and did not seem worth the time. In this case, I figured I should just do the easy solution, even if it isn't super elegant. For part 2 I just found each instance of "A" in the list. Then, we know that for this to be valid, the upper left has to be either "M" or "S" and the lower right needs to be the opposite letter. In addition, the same needs to be true for the upper right and lower left letters respectively. Once again, probably not ideal, but it's simple and easy to understand and that seemed better than making assumptions about how a generic form of this very specific problem would be handled.

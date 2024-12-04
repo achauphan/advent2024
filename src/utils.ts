@@ -1,28 +1,28 @@
 
-export function tokenize<T>(input: string, separator: string | RegExp, parser: (token: string) => T): T[] {
-    return input.split(separator).map(parser);
+export function tokenize<T = string>(input: string, parser?: (token: string) => T, separator?: string | RegExp): T[] {
+    return input.split(separator ?? /\s+/).map(parser ?? (token => token as unknown as T));
 }
 
-export function tokenizeAsInt2dArrayByRow(input: string): number[][] {
+export function tokenizeAs2dArrayByRow<T = string>(input: string, parser?: (token: string) => T, separator?: string | RegExp): T[][] {
     const tokens = input.split(`\n`);
-    const arr = new Array<number[]>();
+    const arr = new Array<T[]>();
     tokens.forEach(
         token => {
-            arr.push(tokenize(token.trim(), /\s+/, (x) => parseInt(x, 10)));
+            arr.push(tokenize(token.trim(), parser,  separator));
         }
     );
     return arr;
 }
 
-export function tokenizeAsInt2dArrayByColumn(input: string): number[][] {
+export function tokenizeAs2dArrayByColumn<T = string>(input: string, parser?: (token: string) => T, separator?: string | RegExp): T[][] {
     const tokens = input.split(`\n`);
-    const arr = new Array<number[]>();
+    const arr = new Array<T[]>();
     tokens.forEach(
         token => {
-            const row = tokenize(token.trim(), /\s+/, (x) => parseInt(x, 10));
+            const row = tokenize(token.trim(), parser, separator);
             for (let i = 0; i < row.length; i++) {
                 if (arr[i] === undefined) {
-                    arr[i] = new Array<number>();
+                    arr[i] = new Array<T>();
                 }
                 arr[i].push(row[i]);
             }

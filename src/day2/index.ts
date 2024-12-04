@@ -1,5 +1,5 @@
 import { Day } from "../day";
-import { tokenizeAsInt2dArrayByRow } from "../utils";
+import { tokenizeAs2dArrayByRow } from "../utils";
 
 class Day2 extends Day {
 
@@ -8,7 +8,7 @@ class Day2 extends Day {
     }
 
     solveForPartOne(input: string): string {
-        const tokens = tokenizeAsInt2dArrayByRow(input);
+        const tokens = tokenizeAs2dArrayByRow(input, (x) => parseInt(x, 10));
         const minChange = 1;
         const maxChange = 3;
         const safeReports = 
@@ -19,7 +19,7 @@ class Day2 extends Day {
     }
 
     solveForPartTwo(input: string): string {
-        const tokens = tokenizeAsInt2dArrayByRow(input);
+        const tokens = tokenizeAs2dArrayByRow(input, (x) => parseInt(x, 10));
         const safeReports = 
             tokens.map(row => {
                 if(this.isSafe(row)){
