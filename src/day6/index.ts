@@ -1,8 +1,8 @@
 import { Day } from "../day";
 
-class Day0 extends Day {
+class Day6 extends Day {
 	constructor () {
-		super(0);
+		super(6);
 	}
 
 	solveForPartOne (input: string): string {
@@ -14,4 +14,4 @@ class Day0 extends Day {
 	}
 }
 
-export default new Day0();
+export default new Day6();

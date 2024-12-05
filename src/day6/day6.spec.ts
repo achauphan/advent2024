@@ -1,11 +1,11 @@
 import { describe, expect, it } from '@jest/globals';
-import day0 from './index';
+import day6 from './index';
 
-describe(`On Day 0`, () => {
+describe(`On Day 6`, () => {
 	it(
 		`part1 is identity function`,
 		() => {
-			expect(day0.solveForPartOne(
+			expect(day6.solveForPartOne(
 				`hello`
 			)).toBe(
 				`hello`
@@ -14,7 +14,7 @@ describe(`On Day 0`, () => {
 	);
 	it(`part2 is identity function`,
 		() => {
-			expect(day0.solveForPartTwo(
+			expect(day6.solveForPartTwo(
 				`hello`
 			)).toBe(
 				`hello`
