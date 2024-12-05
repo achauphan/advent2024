@@ -7,7 +7,9 @@
     "build": "rimraf ./build && tsc",
     "test": "jest",
     "setup": "node src/setup.js",
-    "start": "npm run build && node build/index.js"
+    "start": "npm run build && node build/index.js",
+    "lint": "eslint . --ext .ts",
+    "pushToFriends": "git push group-advent-solutions main:dylan"
   },
   "author": "Dylan Celius",
   "license": "MIT",

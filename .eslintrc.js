@@ -18,6 +18,7 @@ module.exports = {
 		semi: 0,
 		quotes: [`error`, `backtick`],
 		indent: [`error`, `tab`],
-		'no-tabs': [`error`, { allowIndentationTabs: true }]
+		'no-tabs': [`error`, { allowIndentationTabs: true }],
+		'comma-dangle': [`error`, `only-multiline`],
 	}
 }
