@@ -89,7 +89,7 @@ fn problem_2(reports: &Vec<Vec<i32>>) -> i32 {
 fn main() {
     let input_filename = String::from("src/day02/input.txt");
     let input_lines = utils::read_lines(&input_filename);
-    let parsed_input: Vec<Vec<i32>> = utils::string_to_i32_vector(&input_lines);
+    let parsed_input: Vec<Vec<i32>> = utils::string_to_i32_vector(&input_lines, ' ');
     println!("Problem 1: {}\nProblem 2: {}",
         problem_1(&parsed_input), problem_2(&parsed_input));
 
