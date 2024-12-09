@@ -111,3 +111,13 @@ Goal was to sum up the results of all lines in the input which could be made val
 Goal was the same as part one but with the addition of a new operator type: || for concatenation. Luckily, this was really easy given the work that was put into part one. We can simply change the integer -> binary converter to do base 3 instead (since there are 3 different operator types). This means we should have 3^(n-1) possible ways to interpret the equation, found by evaluating the values against the equation mask as defined by turning the iteration number to a base 3 mask. This meant I could use almost the exact same code as part 1 with literally a single number change and 1 extra line of code.
 
 Theoretically this could be extended further, but each additional operator option would add exponentially more time. There is likely a way to improve this so it's less brute force, but it was quick and I'm running behind on AoC right now, so that's a problem for another day.
+
+### Day 8
+
+#### Part 1
+
+Goal was to find the number of unique "antipodes" from a map of antennas and their frequencies. This was pretty quick to solve, as once the map is made and a list of frequency coordinates are gathered, it just requires finding the change in x and y and applying that to the coordinate being checked. We then just ensure that there isn't already an antipode there and that it is within bounds, and if so, success! My approach may be a little bit dirty, but I was able to knock it out in about 15 minutes so a win on the time front.
+
+#### Part 2
+
+Goal was similar to part 1, but the antenna could form antipodes at any increment of their differences. Initially I assumed I would need to reduce the change in x and y by their GCD, but after testing that, all GCD's of changes seem to be 1 or -1, which makes this a lot easier. Once again, there might be a better way to approach this, but the simplest solution did seem to be just iterating successively further away from the original coordinate using the changes between the two antenna until both in the positive and negative direction we were out of bounds. It seemed to work pretty well - the only thing that wasn't working is that I forgot that the original node could also be an antipode, which I hadn't checked yet. Adjusting the step iterator to start at 0 instead of 1 solved that issue and got me the correct values!
