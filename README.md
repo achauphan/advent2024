@@ -89,3 +89,25 @@ Goal was to sum the middle number of all "updates" that follow a series of rules
 #### Part 2
 
 Goal was to sum the middle number of all _invalid_ "updates" after they had been reordered to be correct. I detail more about my approach in the code for this one, but given one critical assumption, I was able to establish 3 cases and create a custom sort function to use on the invalid updates (determining if they were invalid based on the `isValid()` recursive function I used in part 1). Similar to most AoC challenges, if what work you've done so far is correct, the next step can be done without reverifying the validity of the steps before. The function used to sort makes sure that what has already has been done follows the set of rules provided, so we just need to prove the current step also is correct, and by the end we know we have a valid update without going back and double checking the rules of the items already in the update. This is based on the assumption that there will be no rules provided that are contradictory. Part of me still wants to do a proof by induction for this as well, but not today. Was a pretty fun day overall, I got to make a custom sort function - I don't get to do that too often!
+
+### Day 6
+
+#### Part 1
+
+WIP
+
+#### Part 2
+
+WIP
+
+### Day 7
+
+#### Part 1
+
+Goal was to sum up the results of all lines in the input which could be made valid by using + or * operations. This uniquely required ignoring standard order of operations (thank the lord for that). The big hurdle here was figuring out how to actually generate and test every single unique combination of operators on the values against the goal result. Luckily, I had a brainiac moment and realized there are 2 operators, meaning some sort of binary mask should work great. After looking into an easy way to convert integers into their binary representations (with padded 0s) this was pretty straightforward! If we are given n values on the right, then we know that there are n - 1 spaces for operators, and since there are 2 different types of operators, we know that there must be 2^(n - 1) different possible ways to evaluate the equation. We can loop over all numbers from 0 to 2^(n - 1) and test the equation using the binary mask from that iteration. And it worked great. I always love it when you get the answer right on the first try.
+
+#### Part 2
+
+Goal was the same as part one but with the addition of a new operator type: || for concatenation. Luckily, this was really easy given the work that was put into part one. We can simply change the integer -> binary converter to do base 3 instead (since there are 3 different operator types). This means we should have 3^(n-1) possible ways to interpret the equation, found by evaluating the values against the equation mask as defined by turning the iteration number to a base 3 mask. This meant I could use almost the exact same code as part 1 with literally a single number change and 1 extra line of code.
+
+Theoretically this could be extended further, but each additional operator option would add exponentially more time. There is likely a way to improve this so it's less brute force, but it was quick and I'm running behind on AoC right now, so that's a problem for another day.
