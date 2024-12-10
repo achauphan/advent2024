@@ -50,7 +50,6 @@ class Day6 extends Day {
 				row.forEach(
 					(cell, x) => {
 						if (cell === `^`) {
-							console.log(`Found starting location at ${x}, ${y}`);
 							start = { x, y };
 						}
 					}

@@ -121,3 +121,23 @@ Goal was to find the number of unique "antipodes" from a map of antennas and the
 #### Part 2
 
 Goal was similar to part 1, but the antenna could form antipodes at any increment of their differences. Initially I assumed I would need to reduce the change in x and y by their GCD, but after testing that, all GCD's of changes seem to be 1 or -1, which makes this a lot easier. Once again, there might be a better way to approach this, but the simplest solution did seem to be just iterating successively further away from the original coordinate using the changes between the two antenna until both in the positive and negative direction we were out of bounds. It seemed to work pretty well - the only thing that wasn't working is that I forgot that the original node could also be an antipode, which I hadn't checked yet. Adjusting the step iterator to start at 0 instead of 1 solved that issue and got me the correct values!
+
+### Day 9
+
+#### Part 1
+
+WIP
+
+#### Part 2
+
+WIP
+
+### Day 10
+
+#### Part 1
+
+Goal was to find the number of full trails in a grid representing the topographical area. Notably, this is the sum number of _unique_ terminus points that can be accessed from each trailhead, not each unique path. As per usual, I immediately started figuring out a recursive method to solve this. After generating a node network, linking each cell to its neighbors, all that remained was calling this recursive function on each trailhead to get the total number of reachable 9's following the set rule. Weirdly enough I discovered later on that I actually solved part 2 before solving part 1. My initial method returned all unique paths to each reachable terminus location, not just the number of unique reachable terminuses. This made part 2 very easy, and allowed me to use basically the exact same code for the recursion function since my recursion function returns an array containing the id of each trail's end. When there is more than 1 route to a terminus, that id will be present multiple times. But, by casting the resulting array to a Set, it removes duplicates automatically, meaning the size of the set is the result we desire for each trailhead.
+
+#### Part 2
+
+Goal was to find the number of unique trails in a grid representing the topographical area. As mentioned in part 1, I accidentally solved this first, meaning that the result of my recursive function is an array containing the id of a terminus value any time it was reached. The length of this array is the number of unique paths found from the starting trailhead.

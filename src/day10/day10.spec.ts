@@ -3,21 +3,35 @@ import day10 from './index';
 
 describe(`On Day 10`, () => {
 	it(
-		`part1 is identity function`,
+		`part1 is sum of unique terminus points reachable from each trailhead`,
 		() => {
 			expect(day10.solveForPartOne(
-				`hello`
+				`89010123
+				78121874
+				87430965
+				96549874
+				45678903
+				32019012
+				01329801
+				10456732`
 			)).toBe(
-				`hello`
+				`36`
 			);
 		}
 	);
-	it(`part2 is identity function`,
+	it(`part2 is sum of unique paths to reachable terminus points from each trailhead`,
 		() => {
 			expect(day10.solveForPartTwo(
-				`hello`
+				`89010123
+				78121874
+				87430965
+				96549874
+				45678903
+				32019012
+				01329801
+				10456732`
 			)).toBe(
-				`hello`
+				`81`
 			);
 		}
 	);
