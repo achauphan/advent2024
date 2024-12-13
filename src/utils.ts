@@ -51,3 +51,153 @@ export function tokenizeAs2dArrayByColumn<T = string> (input: string, parser?: (
 	);
 	return arr;
 }
+
+// Bidirectional linked list supporting generics
+export class Node<T> {
+	static createNodesFromArray<T> (arr: T[]): Node<T> {
+		const head = new Node(arr[0]);
+		let current = head;
+		let previous: Node<T> | undefined;
+		for (let i = 1; i < arr.length; i++) {
+			current.next = new Node(arr[i]);
+			if (previous !== undefined) {
+				current.previous = previous;
+			}
+			previous = current;
+			current = current.next;
+		}
+		current.previous = previous;
+		return head;
+	}
+
+	static getArrayFromNode<T> (head: Node<T>): T[] { // forward only
+		const arr: T[] = [];
+		let current: Node<T> | undefined = head;
+		while (current !== undefined) {
+			arr.push(current.value);
+			current = current.next;
+		}
+		return arr;
+	}
+
+	value: T;
+	next: Node<T> | undefined;
+	previous: Node<T> | undefined;
+
+	constructor (value: T) {
+		this.value = value;
+	}
+
+	forEach (callback: (node: Node<T>, index?: number) => void, updateBeforeCallback: boolean = false) {
+		let current: Node<T> | undefined = this;
+		let index = 0;
+		while (current !== undefined) {
+			const nextNode: Node<T> | undefined = current.next;
+			callback(current, index);
+			current = updateBeforeCallback ? nextNode : current.next;
+			index++;
+		}
+	}
+
+	getNext (steps: number = 1): Node<T> {
+		let current: Node<T> = this;
+		for (let i = 0; i < steps; i++) {
+			current = current.next ?? this;
+		}
+		return current;
+	}
+
+	getPrevious (steps: number = 1): Node<T> {
+		let current: Node<T> = this;
+		for (let i = 0; i < steps; i++) {
+			current = current.previous ?? this;
+		}
+		return current;
+	}
+
+	getLast (): Node<T> {
+		let current: Node<T> = this;
+		while (current.next !== undefined) {
+			current = current.next;
+		}
+		return current;
+	}
+
+	getFirst (): Node<T> {
+		let current: Node<T> = this;
+		while (current.previous !== undefined) {
+			current = current.previous;
+		}
+		return current;
+	}
+
+	getForwardLength (): number {
+		let current: Node<T> | undefined = this;
+		let count = 0;
+		while (current !== undefined) {
+			count++;
+			current = current.next;
+		}
+		return count;
+	}
+
+	getBackwardLength (): number {
+		let current: Node<T> | undefined = this;
+		let count = 0;
+		while (current !== undefined) {
+			count++;
+			current = current.previous;
+		}
+		return count;
+	}
+
+	toString (): string {
+		let current: Node<T> | undefined = this;
+		let str = ``;
+		let index = 0;
+		while (current !== undefined) {
+			const next = current.next !== undefined ? current.next.value : undefined;
+			const previous = current.previous !== undefined ? current.previous.value : undefined;
+			str += `${index}: ${previous} <- ${current.value} -> ${next}\n`;
+			current = current.next;
+			index++;
+		}
+		return str;
+	}
+
+	insertBefore (node: Node<T> | T): void {
+		if (!(node instanceof Node)) {
+			node = new Node(node);
+		}
+		if (node.previous !== undefined) {
+			node.previous.next = node.next;
+		}
+		if (node.next !== undefined) {
+			node.next.previous = node.previous;
+		}
+		if (this.previous !== undefined) {
+			this.previous.next = node;
+		}
+		node.previous = this.previous;
+		this.previous = node;
+		node.next = this;
+	}
+
+	insertAfter (node: Node<T> | T): void {
+		if (!(node instanceof Node)) {
+			node = new Node(node);
+		}
+		if (node.previous !== undefined) {
+			node.previous.next = node.next;
+		}
+		if (node.next !== undefined) {
+			node.next.previous = node.previous;
+		}
+		if (this.next !== undefined) {
+			this.next.previous = node;
+		}
+		node.previous = this;
+		node.next = this.next;
+		this.next = node;
+	}
+}

@@ -10,6 +10,9 @@ import day7 from './day7/index';
 import day8 from './day8/index';
 import day9 from './day9/index';
 import day10 from './day10/index';
+import day11 from './day11/index';
+import day12 from './day12/index';
+import day13 from './day13/index';
 // MORE IMPORTS HERE
 const days: Day[] = [
 	day0,
@@ -23,22 +26,22 @@ const days: Day[] = [
 	day8,
 	day9,
 	day10,
+	day11,
+	day12,
+	day13,
 	// MORE DAYS HERE
 ];
 
 async function runDay (dayId: number) {
 	const resultPart1 = await days[dayId].partOne();
-	console.log(`Part 1 result:\n`);
-	console.log(resultPart1);
-
+	console.log(`Part 1 result: ${resultPart1}`);
 	console.log(`\n`);
 
 	const resultPart2 = await days[dayId].partTwo();
-	console.log(`Part 2 result:\n`);
-	console.log(resultPart2);
+	console.log(`Part 2 result: ${resultPart2}`);
 }
 
-console.log(`\n\n\n--- ADVENT OF CODE ---\n\n`);
+console.log(`\n\n--- ADVENT OF CODE ---\n`);
 const params = process.argv.splice(2);
 if (params.length) {
 	runDay(parseInt(params[0], 10));

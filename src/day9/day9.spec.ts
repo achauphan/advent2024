@@ -3,21 +3,21 @@ import day9 from './index';
 
 describe(`On Day 9`, () => {
 	it(
-		`part1 is identity function`,
+		`part1 compresses file blocks across free space`,
 		() => {
 			expect(day9.solveForPartOne(
-				`hello`
+				`2333133121414131402`
 			)).toBe(
-				`hello`
+				`1928`
 			);
 		}
 	);
-	it(`part2 is identity function`,
+	it(`part2 moves whole file chunks`,
 		() => {
 			expect(day9.solveForPartTwo(
-				`hello`
+				`2333133121414131402`
 			)).toBe(
-				`hello`
+				`2858`
 			);
 		}
 	);

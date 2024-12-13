@@ -34,7 +34,7 @@ Project skeleton taken from <https://github.com/LBognanni/adventofcode-typescrip
 
 ## Docs
 
-### Day 1
+### [Day 1](https://adventofcode.com/2024/day/1)
 
 #### Part 1
 
@@ -48,7 +48,7 @@ Approach was just to parse the input as two columns, sort said columns, and then
 
 This was a simple modification to the existing Part 1 solution. Just instead of summing up the abs of the differences, we sum up all left elements times their freq in the right. Use a built in `.filter()` function to simplify this process.
 
-### Day 2
+### [Day 2](https://adventofcode.com/2024/day/2)
 
 #### Part 1
 
@@ -58,7 +58,7 @@ Goal was to check rows of integers and see if they follow two cases across the w
 
 Goal was to do the same as part one, but allow for a single errored value. This was a pain. There are 12 cases in my input which were not working with my initial design (as I believe the 0th index value was never being removed from the list), so a brute force solution was necessary. I hope to revisit this since as long as we can check 0 and ensure that it's accurate, then the first error found is the linchpin (if removing the first error doesn't work, then no other value can be removed so that it works). I could write a proof for this using induction, but I don't want to.
 
-### Day 3
+### [Day 3](https://adventofcode.com/2024/day/3)
 
 #### Part 1
 
@@ -70,7 +70,7 @@ Goal was to extend part 1 by also adding an enable/disable command as `do()` and
 
 I love regex <3
 
-### Day 4
+### [Day 4](https://adventofcode.com/2024/day/4)
 
 #### Part 1
 
@@ -80,7 +80,7 @@ Goal was to find how many occurrences of the word "XMAS" there are in a grid of 
 
 Goal is to find the number of X-"MAS" patterns there are in an array of characters. Sometimes AoC is fun, and lets you reuse your part 1 code, and sometimes it doesn't. This is a case of the latter. No matter how I thought about it, there was no way to reuse my existing code without it being massively overhauled in a less than optimal manner. Attempting to make the part 2 solution generic also was not working out in my head since it's hard to decide exactly how other inputs would be handled and did not seem worth the time. In this case, I figured I should just do the easy solution, even if it isn't super elegant. For part 2 I just found each instance of "A" in the list. Then, we know that for this to be valid, the upper left has to be either "M" or "S" and the lower right needs to be the opposite letter. In addition, the same needs to be true for the upper right and lower left letters respectively. Once again, probably not ideal, but it's simple and easy to understand and that seemed better than making assumptions about how a generic form of this very specific problem would be handled.
 
-### Day 5
+### [Day 5](https://adventofcode.com/2024/day/5)
 
 #### Part 1
 
@@ -90,7 +90,7 @@ Goal was to sum the middle number of all "updates" that follow a series of rules
 
 Goal was to sum the middle number of all _invalid_ "updates" after they had been reordered to be correct. I detail more about my approach in the code for this one, but given one critical assumption, I was able to establish 3 cases and create a custom sort function to use on the invalid updates (determining if they were invalid based on the `isValid()` recursive function I used in part 1). Similar to most AoC challenges, if what work you've done so far is correct, the next step can be done without reverifying the validity of the steps before. The function used to sort makes sure that what has already has been done follows the set of rules provided, so we just need to prove the current step also is correct, and by the end we know we have a valid update without going back and double checking the rules of the items already in the update. This is based on the assumption that there will be no rules provided that are contradictory. Part of me still wants to do a proof by induction for this as well, but not today. Was a pretty fun day overall, I got to make a custom sort function - I don't get to do that too often!
 
-### Day 6
+### [Day 6](https://adventofcode.com/2024/day/6)
 
 #### Part 1
 
@@ -100,7 +100,7 @@ WIP
 
 WIP
 
-### Day 7
+### [Day 7](https://adventofcode.com/2024/day/7)
 
 #### Part 1
 
@@ -112,7 +112,7 @@ Goal was the same as part one but with the addition of a new operator type: || f
 
 Theoretically this could be extended further, but each additional operator option would add exponentially more time. There is likely a way to improve this so it's less brute force, but it was quick and I'm running behind on AoC right now, so that's a problem for another day.
 
-### Day 8
+### [Day 8](https://adventofcode.com/2024/day/8)
 
 #### Part 1
 
@@ -122,17 +122,11 @@ Goal was to find the number of unique "antipodes" from a map of antennas and the
 
 Goal was similar to part 1, but the antenna could form antipodes at any increment of their differences. Initially I assumed I would need to reduce the change in x and y by their GCD, but after testing that, all GCD's of changes seem to be 1 or -1, which makes this a lot easier. Once again, there might be a better way to approach this, but the simplest solution did seem to be just iterating successively further away from the original coordinate using the changes between the two antenna until both in the positive and negative direction we were out of bounds. It seemed to work pretty well - the only thing that wasn't working is that I forgot that the original node could also be an antipode, which I hadn't checked yet. Adjusting the step iterator to start at 0 instead of 1 solved that issue and got me the correct values!
 
-### Day 9
+### [Day 9](https://adventofcode.com/2024/day/9)
 
-#### Part 1
+Part 1 of Day 9 wasn't too bad. A simple couple of for-loops that compress the data down into an array and then computes the checksum. Part 2 however, was hell. Attempting to do this without resorting to just rewriting the array 1000 times required a linked list which meant creating a Node class and suffering through all of that. Simply put, this was a pain but I'm glad it's over. I may go back and look into others' solutions now that I solved it on my own to see how I can improve this.
 
-WIP
-
-#### Part 2
-
-WIP
-
-### Day 10
+### [Day 10](https://adventofcode.com/2024/day/10)
 
 #### Part 1
 
@@ -141,3 +135,17 @@ Goal was to find the number of full trails in a grid representing the topographi
 #### Part 2
 
 Goal was to find the number of unique trails in a grid representing the topographical area. As mentioned in part 1, I accidentally solved this first, meaning that the result of my recursive function is an array containing the id of a terminus value any time it was reached. The length of this array is the number of unique paths found from the starting trailhead.
+
+### [Day 11](https://adventofcode.com/2024/day/11)
+
+Part 1 took a little bit of finagling to get running quickly since my initial recursive solution exceeded the call stack, but using a linked list allowed for a pretty quick processing time all things considered. However, as I quickly realized in Part 2, this was not going to be a valid approach. After spending some time playing around with the numbers and some research online, it was clear caching/memoization would be required in order to accomplish this in any reasonable amount of time. Using caching meant I was able to get my part 2 performance time down to just over 4ms on my machine, while part 1 took a full 37ms to do 3x less steps. Caching seriously works.
+
+### [Day 12](https://adventofcode.com/2024/day/12)
+
+Part 1 of this was very fun, being able to use flood fill is very satisfying to me. I tried out using a new coord id system rather than strings like I usually do - and it mostly worked? A bit more complex, so I'm undecided on using it going forward but it was worth a shot.
+
+Part 2 of this however was FUN^tm. Thanks to the internet I was guided along a path to gradients, and it is there that I found my way out of this hell. So, many many array manipulations are done, but it works, and pretty speedily too! 250ms isn't bad for all the matrix ops I had to do. Very happy this is over though.
+
+### [Day 13](https://adventofcode.com/2024/day/13)
+
+As per usual, part 1 was fairly straight forward, but things were cranked to 11 on part 2. I realized it was a system of equations almost immediately but my brain didn't remember how to solve those so I tried a naive solution of nested for-loops. Worked for part 1, but had to rethink for part 2. So, I went online and retaught myself some basic linear algebra that I haven't had to use in years. Came back to me pretty quick, and man is it fast. Part 1 on average actually takes longer than part 2 because it has to check against the max presses - but both take less than 5ms which is awesome. Very satisfying day.
